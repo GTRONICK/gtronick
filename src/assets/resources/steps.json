@@ -239,11 +239,11 @@
             },
             {
                 "command": "ENTER",
-                "comments": ["Establece el sector iniciar por defecto"]
+                "comments": ["Establece el sector inicial por defecto"]
             },
             {
                 "command": "+550M",
-                "comments": ["Determina el tamaño de la partición, en este caso 512MB"]
+                "comments": ["Determina el tamaño de la partición, en este caso 550MB"]
             },
             {
                 "command": "EF00",
@@ -290,7 +290,7 @@
                 "comments": []
             },
             {
-                "command": "W",
+                "command": "w",
                 "comments": []
             },
             {
@@ -562,7 +562,7 @@
     {
         "index": 37,
         "title": "Bootloader: GRUB",
-        "subtitle": "Sólo si no instaló systemd-boot, de lo contrario saltar al paso 40",
+        "subtitle": "Sólo si no instaló systemd-boot, de lo contrario saltar al paso 39",
         "description": "Generar el archivo de la entrada por defecto para systemd-boot",
         "commands": [
             {
@@ -742,7 +742,7 @@
         "index": 48,
         "title": "Primer inicio",
         "subtitle": "Verificación de red",
-        "description": "Si sólo dispones de WiFi, saltar al paso 50",
+        "description": "Si sólo dispones de WiFi, saltar al paso 49",
         "commands": [
             {
                 "command": "ping -c5 www.archlinux.org",
