@@ -1,0 +1,64 @@
+.gk-arch-steps {
+
+    color: whitesmoke;
+    
+    &-item{
+        padding: 0 1rem;
+    }
+    &-title {
+        text-align: center;
+    }
+    &-subtitle {
+        width: 100%;
+        text-align: center;
+        font-size: medium;
+        font-style: italic;
+        display: inline-block;
+        color: white;
+    }
+    &-desc {
+        text-align: justify;
+    }
+    &-command {
+        &-container{
+            padding: 0.5rem 1rem;
+            text-align: justify;
+            border: 1px solid #CECECE;
+            border-radius: 10px;
+            background-color: #f3f6fade;
+            color: #48616e;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            overflow: auto;
+        }
+        &-pre{
+            padding: 0.5rem 1rem;
+            text-align: justify;
+            color: #48616e;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: auto;
+            margin: 0;
+            padding: 0;
+        }
+        &-comment {
+            // width: max-content;
+            font-style: italic;
+            font-size: smaller;
+            color: #567483;
+        }
+        &-copy {
+            --bs-btn-padding-y: .1rem;
+            --bs-btn-padding-x: .5rem;
+            --bs-btn-font-size: .7rem;
+            display: flex;
+            align-items: center;
+            margin-left: 0.5rem;
+            max-height: 1.5rem;
+        }
+    }
+}

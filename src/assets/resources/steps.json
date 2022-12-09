@@ -1,0 +1,803 @@
+[
+    {
+        "index": 1,
+        "title": "Acceso desde el live system",
+        "subtitle": "",
+        "description": "Para acceder a esta guía desde el Live system de Archlinux",
+        "commands": [
+            {
+                "command": "elinks https://gtronick.github.io/ALIG/",
+                "comments": []
+            }
+        ]
+    },
+    {
+        "index": 2,
+        "title": "Configuración de BIOS",
+        "subtitle": "",
+        "description": "Configurar la BIOS de tu equipo para permitir el arranque desde un dispositivo USB, y el arranque EFI. Si la instalación se está haciendo en VirtualBox, configurar la máquina virtual para permitir el arranque con EFI.",
+        "commands": [
+            {
+                "command": "# Seleccionar la máquina virtual, propiedades, System, Enable EFI.",
+                "comments": []
+            }
+        ]
+    },
+    {
+        "index": 3,
+        "title": "Arranque del medio de instalación",
+        "subtitle": "",
+        "description": "Iniciar la máquina y seleccionar el disco de instalación",
+        "commands": [
+            {
+                "command": "# Arch Linux Arch ISO x86_64 UEFI USB",
+                "comments": ["El nombre puede variar, pero generalmente es como se muestra"]
+            }
+        ]
+    },
+    {
+        "index": 4,
+        "title": "Cargar idioma para el teclado",
+        "subtitle": "",
+        "description": "Cuando termine de iniciar, cargar la distribución de teclado correspondiente. Por defecto, la distribución es US (Inglés). Para listar las distribuciones de teclado disponibles usar:",
+        "commands": [
+            {
+                "command": "ls /usr/share/kbd/keymaps/**/*.map.gz",
+                "comments": ["Muestra los idiomas soportados"]
+            },
+            {
+                "command": "loadkeys es",
+                "comments": ["Este comando cargará la distribución de teclas para el idioma Español"]
+            }
+        ]
+    },
+    {
+        "index": 5,
+        "title": "Verificación UEFI",
+        "subtitle": "",
+        "description": "Para verificar que estamos en modo UEFI",
+        "commands": [
+            {
+                "command": "ls /sys/firmware/efi/efivars",
+                "comments": ["Si se muestra contenido en la carpeta efivars, quiere decir que arrancamos el sistema correctamente en modo UEFI."]
+            }
+        ]
+    },
+    {
+        "index": 6,
+        "title": "Conexión WiFi",
+        "subtitle": "Si estás conectado por Ethernet, saltar al paso 13",
+        "description": "En caso de tener sólo wifi",
+        "commands": [
+            {
+                "command": "iwctl",
+                "comments": []
+            }
+        ]
+    },
+    {
+        "index": 7,
+        "title": "Conexión WiFi",
+        "subtitle": "",
+        "description": "Listar los dispositivos",
+        "commands": [
+            {
+                "command": "device list",
+                "comments": []
+            }
+        ]
+    },
+    {
+        "index": 8,
+        "title": "Conexión WiFi",
+        "subtitle": "",
+        "description": "Escanear redes",
+        "input": {
+            "prompt": "Por favor, ingresa el nombre del dispositivo (wl2ps0, wlan0, etc.)",
+            "varName":"<device>"
+        },
+        "commands": [
+            {
+                "command": "station <device> scan",
+                "comments": []
+            }
+        ]
+    },
+    {
+        "index": 9,
+        "title": "Conexión WiFi",
+        "subtitle": "",
+        "description": "Listar redes disponibles",
+        "commands": [
+            {
+                "command": "station <device> get-networks",
+                "comments": []
+            }
+        ]
+    },
+    {
+        "index": 10,
+        "title": "Conexión WiFi",
+        "subtitle": "",
+        "description": "Conectarse a una red",
+        "input":{
+            "prompt":"Por favor, ingresa el SSID de la red a la que te deseas conectar",
+            "varName":"<SSID>"
+        },
+        "commands": [
+            {
+                "command": "station <device> connect <SSID>",
+                "comments": []
+            }
+        ]
+    },
+    {
+        "index": 11,
+        "title": "Conexión WiFi",
+        "subtitle": "",
+        "description": "Salir de iwctl",
+        "commands": [
+            {
+                "command": "exit",
+                "comments": []
+            }
+        ]
+    },
+    {
+        "index": 12,
+        "title": "Verificación de conexión de red",
+        "subtitle": "",
+        "description": "Puedes hacer ping a cualquier URL",
+        "commands": [
+            {
+                "command": "ping -c5 archlinux.org",
+                "comments": ["-c5 indica 5 respuestas, si no lo especificas debes presionar Ctrl + C para interrumpir el comando"]
+            }
+        ]
+    },
+    {
+        "index": 13,
+        "title": "Reloj",
+        "subtitle": "",
+        "description": "Activar la sincronización del reloj del sistema con Internet",
+        "commands": [
+            {
+                "command": "timedatectl set-ntp true",
+                "comments": []
+            }
+        ]
+    },
+    {
+        "index": 14,
+        "title": "Reloj",
+        "subtitle": "",
+        "description": "Verificar (Opcional)",
+        "commands": [
+            {
+                "command": "timedatectl status",
+                "comments": []
+            }
+        ]
+    },
+    {
+        "index": 15,
+        "title": "Unidades de almacenamiento",
+        "subtitle": "",
+        "description": "Identificar",
+        "commands": [
+            {
+                "command": "lsblk",
+                "comments": ["Se puede mostrar /dev/sda, /dev/nvme0n1 o /dev/mmcblk0"]
+            }
+        ]
+    },
+    {
+        "index": 16,
+        "title": "Tabla de particiones",
+        "subtitle": "",
+        "description": "Crear una nueva tabla de particiones GPT",
+        "input": {
+            "prompt": "Por favor, ingresa el nombre de la unidad (sda, nvme0n1, mmcblk0, etc.)",
+            "varName": "<block>"
+        },
+        "commands": [
+            {
+                "command": "gdisk /dev/<block>",
+                "comments": []
+            },
+            {
+                "command": "o",
+                "comments": ["Para borrar todas las particiones existentes"]
+            },
+            {
+                "command": "w",
+                "comments": ["Para escribir los cambios"]
+            },
+            {
+                "command": "Y",
+                "comments": ["Para aceptar y aplicar los cambios"]
+            }
+        ]
+    },
+    {
+        "index": 17,
+        "title": "Particiones: /boot",
+        "subtitle": "",
+        "description": "Crear partición /boot",
+        "commands": [
+            {
+                "command": "gdisk /dev/<block>",
+                "comments": ["Donde <block> puede ser : sda, nvme0n1 o mmcblk0, Se debe mostrar 'GPT: present' en 'Partition table scan'"]
+            },
+            {
+                "command": "n",
+                "comments": ["Crea una nueva partición"]
+            },
+            {
+                "command": "ENTER",
+                "comments": ["Establece el número de partición por defecto"]
+            },
+            {
+                "command": "ENTER",
+                "comments": ["Establece el sector iniciar por defecto"]
+            },
+            {
+                "command": "+550M",
+                "comments": ["Determina el tamaño de la partición, en este caso 512MB"]
+            },
+            {
+                "command": "EF00",
+                "comments": ["Indica el tipo de partición 'EFI System'"]
+            },
+            {
+                "command": "W",
+                "comments": ["Escribe los cambios"]
+            },
+            {
+                "command": "Y",
+                "comments": ["Acepta y aplica los cambios"]
+            }
+        ]
+    },
+    {
+        "index": 18,
+        "title": "Particiones: / (root)",
+        "subtitle": "",
+        "description": "Crear partición /",
+        "commands": [
+            {
+                "command": "gdisk /dev/<block>",
+                "comments": []
+            },
+            {
+                "command": "n",
+                "comments": []
+            },
+            {
+                "command": "ENTER",
+                "comments": []
+            },
+            {
+                "command": "ENTER",
+                "comments": []
+            },
+            {
+                "command": "ENTER",
+                "comments": []
+            },
+            {
+                "command": "ENTER",
+                "comments": []
+            },
+            {
+                "command": "W",
+                "comments": []
+            },
+            {
+                "command": "Y",
+                "comments": []
+            }
+        ]
+    },
+    {
+        "index": 19,
+        "title": "Particiones: Verficiar",
+        "subtitle": "",
+        "description": "Verifica las particiones creadas",
+        "commands": [
+            {
+                "command": "lsblk",
+                "comments": []
+            }
+        ]
+    },
+    {
+        "index": 20,
+        "title": "Particiones: Formateo",
+        "subtitle": "",
+        "description": "Formatear partición /boot",
+        "commands": [
+            {
+                "command": "mkfs.fat -F32 /dev/<block>p1",
+                "comments": []
+            }
+        ]
+    },
+    {
+        "index": 21,
+        "title": "Particiones: Formateo",
+        "subtitle": "",
+        "description": "Formatear partición /",
+        "commands": [
+            {
+                "command": "mkfs.ext4 /dev/<block>p2",
+                "comments": []
+            }
+        ]
+    },
+    {
+        "index": 22,
+        "title": "Particiones: Montaje",
+        "subtitle": "",
+        "description": "Montar particion / en /mnt",
+        "commands": [
+            {
+                "command": "mount /dev/<block>p2 /mnt",
+                "comments": []
+            }
+        ]
+    },
+    {
+        "index": 23,
+        "title": "Particiones: Montaje",
+        "subtitle": "",
+        "description": "Crear directorio para /boot",
+        "commands": [
+            {
+                "command": "mkdir -p /mnt/boot",
+                "comments": []
+            }
+        ]
+    },
+    {
+        "index": 24,
+        "title": "Particiones: Montaje",
+        "subtitle": "",
+        "description": "Montar partición /boot",
+        "commands": [
+            {
+                "command": "mount /dev/<block>p1 /mnt/boot",
+                "comments": []
+            }
+        ]
+    },
+    {
+        "index": 25,
+        "title": "Instalación de paquetes base",
+        "subtitle": "",
+        "description": "Instalar los paquetes base en /mnt",
+        "commands": [
+            {
+                "command": "pacstrap -K /mnt base base-devel nano vi vim linux linux-firmware",
+                "comments": ["Esto iniciará la instalación de los paquetes base (250 MiB aprox.) si se tiene CPU Intel, es recomendable instalar intel-ucode, si tienes AMD, amd-ucode"]
+            }
+        ]
+    },
+    {
+        "index": 26,
+        "title": "fstab",
+        "subtitle": "",
+        "description": "Generar fstab",
+        "commands": [
+            {
+                "command": "genfstab -U /mnt >> /mnt/etc/fstab",
+                "comments": []
+            }
+        ]
+    },
+    {
+        "index": 27,
+        "title": "fstab",
+        "subtitle": "",
+        "description": "Verificar",
+        "commands": [
+            {
+                "command": "cat /mnt/etc/fstab",
+                "comments": []
+            }
+        ]
+    },
+    {
+        "index": 28,
+        "title": "chroot",
+        "subtitle": "",
+        "description": "Iniciar sesión como root en la instalación",
+        "commands": [
+            {
+                "command": "arch-chroot /mnt /bin/bash",
+                "comments": []
+            }
+        ]
+    },
+    {
+        "index": 29,
+        "title": "Soporte de idioma",
+        "subtitle": "",
+        "description": "Generar locales",
+        "commands": [
+            {
+                "command": "nano /etc/locale.gen",
+                "comments": [
+                    "Descomentar las líneas de interés quitando el símbolo #",
+                    "Por el momento, sólo descomenta la línea en_US.UTF-8 UTF-8",
+                    "Para guardar el archivo, presiona Ctrl+X y luego ENTER"
+                ]
+            }
+        ]
+    },
+    {
+        "index": 30,
+        "title": "Soporte de idioma",
+        "subtitle": "",
+        "description": "Construir el soporte de idioma",
+        "commands": [
+            {
+                "command": "locale-gen",
+                "comments": []
+            }
+        ]
+    },
+    {
+        "index": 31,
+        "title": "Soporte de idioma",
+        "subtitle": "",
+        "description": "Crear el archivo de configuración correspondiente",
+        "commands": [
+            {
+                "command": "echo LANG=en_US.UTF-8 > /etc/locale.conf",
+                "comments": []
+            }
+        ]
+    },
+    {
+        "index": 32,
+        "title": "Zona horaria",
+        "subtitle": "",
+        "description": "Ajustar zona horaria",
+        "commands": [
+            {
+                "command": "tzselect",
+                "comments": []
+            },
+            {
+                "command": "2",
+                "comments": []
+            },
+            {
+                "command": "14",
+                "comments": ["Número correspondiente a la zona (America)"]
+            },
+            {
+                "command": "1",
+                "comments": ["Número correspondiente a la subzona (Bogotá)"]
+            }
+        ]
+    },
+    {
+        "index": 33,
+        "title": "Zona horaria",
+        "subtitle": "",
+        "description": "Crear el link simbólico",
+        "commands": [
+            {
+                "command": "rm /etc/localtime",
+                "comments": ["En caso de que el archivo no exista se mostrará un error, pero puedes continuar con el siguiente comando"]
+            },
+            {
+                "command": "ln -s /usr/share/zoneinfo/<ZONA>/<SUB_ZONA> /etc/localtime",
+                "comments": ["donde <ZONA> puede ser America y <SUB_ZONA> puede ser Bogota"]
+            }
+        ]
+    },
+    {
+        "index": 34,
+        "title": "Bootloader",
+        "subtitle": "",
+        "description": "Instalar systemd-boot (Sólo si no se va a usar GRUB, de lo contrario saltar al paso 37)",
+        "commands": [
+            {
+                "command": "bootctl --path=/boot install",
+                "comments": []
+            }
+        ]
+    },
+    {
+        "index": 35,
+        "title": "Bootloader",
+        "subtitle": "",
+        "description": "Generar archivo de configuración de systemd-boot",
+        "commands": [
+            {
+                "command": "echo 'default arch' >> /boot/loader/loader.conf",
+                "comments": []
+            },
+            {
+                "command": "echo 'timeout 0' >> /boot/loader/loader.conf",
+                "comments": []
+            },
+            {
+                "command": "echo 'editor 0' >> /boot/loader/loader.conf",
+                "comments": []
+            }
+        ]
+    },
+    {
+        "index": 36,
+        "title": "Bootloader",
+        "subtitle": "",
+        "description": "Generar el archivo de la entrada por defecto para systemd-boot",
+        "commands": [
+            {
+                "command": "echo 'title Archlinux' >> /boot/loader/entries/arch.conf",
+                "comments": []
+            },
+            {
+                "command": "echo 'linux /vmlinuz-linux' >> /boot/loader/entries/arch.conf",
+                "comments": []
+            },
+            {
+                "command": "echo 'initrd /intel-ucode.img' >> /boot/loader/entries/arch.conf",
+                "comments": []
+            },
+            {
+                "command": "echo 'initrd /initramfs-linux.img' >> /boot/loader/entries/arch.conf",
+                "comments": []
+            },
+            {
+                "command": "echo 'options root=PARTUUID='$(blkid -s PARTUUID -o value /dev/<block>p2)' rw' >> /boot/loader/entries/arch.conf ",
+                "comments": []
+            }
+        ]
+    },
+    {
+        "index": 37,
+        "title": "Bootloader: GRUB",
+        "subtitle": "Sólo si no instaló systemd-boot, de lo contrario saltar al paso 40",
+        "description": "Generar el archivo de la entrada por defecto para systemd-boot",
+        "commands": [
+            {
+                "command": "grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=grub",
+                "comments": []
+            }
+        ]
+    },
+    {
+        "index": 38,
+        "title": "Bootloader: GRUB",
+        "subtitle": "",
+        "description": "Generar archivo de configuración de grub",
+        "commands": [
+            {
+                "command": "grub-mkconfig -o /boot/grub/grub.cfg",
+                "comments": []
+            }
+        ]
+    },
+    {
+        "index": 39,
+        "title": "Configuración de red",
+        "subtitle": "",
+        "description": "Agregar el nombre del host a /etc/hostname",
+        "input":{
+            "prompt":"Por favor, ingresa el nombre de usuario que deseas para tu instalación",
+            "varName":"<userName>"
+        },
+        "commands": [
+            {
+                "command": "echo <userName> > /etc/hostname",
+                "comments": []
+            }
+        ]
+    },
+    {
+        "index": 40,
+        "title": "Configuración de red",
+        "subtitle": "",
+        "description": "Agregar el hostname a /etc/hosts, por ejemplo",
+        "commands": [
+            {
+                "command": "echo '127.0.0.1        localhost.localdomain        localhost' >> /etc/hosts",
+                "comments": []
+            },
+            {
+                "command": "echo '::1              localhost.localdomain        localhost' >> /etc/hosts",
+                "comments": []
+            },
+            {
+                "command": "echo '127.0.1.1        <userName>.localdomain        <userName>' >> /etc/hosts",
+                "comments": []
+            }
+        ]
+    },
+    {
+        "index": 41,
+        "title": "Instalación de paquetes adicionales",
+        "subtitle": "",
+        "description": "Instala los paquetes que creas convenientes en este paso, por ejemplo plasma, sddm, xorg y networkmanager, si deseas usar KDE como entorno de escritorio",
+        "commands": [
+            {
+                "command": "pacman -S sudo ntfs-3g gvfs gvfs-mtp",
+                "comments": [
+                    "Otros paquetes recomendados:",
+                    "plasma",
+                    "sddm",
+                    "xorg-server",
+                    "networkmanager",
+                    "dolphin",
+                    "konsole",
+                    "firefox",
+                    "dnsmasq",
+                    "git"
+                ]
+            }
+        ]
+    },
+    {
+        "index": 42,
+        "title": "Configuración de servicios",
+        "subtitle": "",
+        "description": "Puedes habilitar los servicios de tu interfaz gráfica u otros servicios antes del primer arranque",
+        "commands": [
+            {
+                "command": "systemctl enable sddm.service",
+                "comments": ["Habilita la interfaz gráfica de SDDM para mostrar la pantalla de login"]
+            },
+            {
+                "command": "systemctl enable NetworkManager.service",
+                "comments": ["Habilita la conexión de red"]
+            },
+            {
+                "command": "systemctl enable bluetooth.service",
+                "comments": ["Habilita la conexión bluetooth"]
+            }
+        ]
+    },
+    {
+        "index": 43,
+        "title": "Contraseña",
+        "subtitle": "",
+        "description": "Ajusta la contraseña para root",
+        "commands": [
+            {
+                "command": "passwd",
+                "comments": ["Ingresa y confirma la contraseña para el superusuario"]
+            }
+        ]
+    },
+    {
+        "index": 44,
+        "title": "Desmontaje de particiones",
+        "subtitle": "",
+        "description": "Salir de la sesión, desmontar particiones",
+        "commands": [
+            {
+                "command": "exit",
+                "comments": ["Saldrá de la consola de arch-chroot"]
+            },
+            {
+                "command": "umount -R /mnt",
+                "comments": ["Desmontará recursivamente todas las particiones montadas previamente"]
+            },
+            {
+                "command": "lsblk",
+                "comments": ["Verifica que se hayan desmontado todas las particiones"]
+            }
+        ]
+    },
+    {
+        "index": 45,
+        "title": "Reinicio",
+        "subtitle": "",
+        "description": "Asegúrate de no tener ningún periférico o dispositivo conectado que no sea estrictamente necesario, como discos duros externos, monitores adicionales, etc.",
+        "commands": [
+            {
+                "command": "reboot",
+                "comments": ["Reiniciará el sistema"]
+            }
+        ]
+    },
+    {
+        "index": 46,
+        "title": "Primer inicio",
+        "subtitle": "Creación del usuario",
+        "description": "Después de reiniciar el equipo con Archlinux instalado, crear un nuevo usuario, por ejemplo",
+        "commands": [
+            {
+                "command": "useradd -m <userName>",
+                "comments": ["Creará las carpetas del home, como Documents, Downloads, Music, Pictures, etc. en /home/<userName>"]
+            },
+            {
+                "command": "passwd <userName>",
+                "comments": ["Ingresa y confirma la contraseña para el nuevo usuario"]
+            }
+        ]
+    },
+    {
+        "index": 47,
+        "title": "Primer inicio",
+        "subtitle": "Permisos de superusuario",
+        "description": "Para poder ejecutar comandos como superusuario, debes modificar el archivo /etc/sudoers. Es imperativo que siempre uses visudo para editar este archivo.",
+        "commands": [
+            {
+                "command": "EDITOR=nano visudo",
+                "comments": [
+                    "Buscar la línea ROOT ALL=(ALL) ALL", 
+                    "Justo debajo de esta línea, agregar nuestro usuario como:",
+                    "<userName>   ALL=(ALL) ALL"
+                ]
+            }
+        ]
+    },
+    {
+        "index": 48,
+        "title": "Primer inicio",
+        "subtitle": "Verificación de red",
+        "description": "Si sólo dispones de WiFi, saltar al paso 50",
+        "commands": [
+            {
+                "command": "ping -c5 www.archlinux.org",
+                "comments": [
+                    "-c5 indica 5 respuestas, si no lo especificas debes presionar Ctrl + C para interrumpir el comando"
+                ]
+            }
+        ]
+    },
+    {
+        "index": 49,
+        "title": "Primer inicio",
+        "subtitle": "Verificación de red",
+        "description": "Si ya dispones de la interfaz gráfica, usa el applet o herramienta de conexión proporcionada por tu entorno de escritorio, de lo contrario puedes usar los siguientes comandos si instalaste networkmanager",
+        "commands": [
+            {
+                "command": "nmcli device wifi list",
+                "comments": ["Listará los SSIDs disponibles"]
+            },
+            {
+                "command": "nmcli device wifi connect <SSID> password <PASSWORD>",
+                "comments": ["Te permitirá conectarte al SSID deseado"]
+            },
+            {
+                "command": "ping -c5 www.archlinux.org",
+                "comments": ["-c5 indica 5 respuestas, si no lo especificas debes presionar Ctrl + C para interrumpir el comando"]
+            }
+        ]
+    },
+    {
+        "index": 50,
+        "title": "Recursos y solución de problemas",
+        "subtitle": "",
+        "description": "Si tienes algún problema o duda con la instalación, por favor usa los siguientes recursos",
+        "commands": [
+            {
+                "command": "https://wiki.archlinux.org",
+                "comments": ["Wiki oficial de Archlinux"]
+            },
+            {
+                "command": "https://bbs.archlinux.org/",
+                "comments": ["Foro oficial"]
+            },
+            {
+                "command": "gtronick@gmail.com",
+                "comments": ["Trataré de responder lo más pronto posible"]
+            },
+            {
+                "command": "https://www.youtube.com/user/GTRONICK",
+                "comments": ["Mi canal de YouTube, tal vez encuentres algo interesante!"]
+            },
+            {
+                "command": "https://ko-fi.com/gtronick",
+                "comments": ["Tus donaciones mantienen el espíritu de desarrollo activo! :D"]
+            }
+        ]
+    }
+]

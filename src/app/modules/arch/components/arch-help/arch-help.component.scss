@@ -1,0 +1,11 @@
+.gk-arch-help {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: whitesmoke;
+    flex-direction: column;
+    &-link {
+        color: white;
+        font-weight: bolder;
+    }
+}

@@ -1,4 +1,5 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
+import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 
 @Component({
   selector: 'gk-header',
@@ -7,6 +8,25 @@ import { Component, ViewEncapsulation } from '@angular/core';
   encapsulation: ViewEncapsulation.None,
   host: { class: 'gk-header' },
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit{
+
+  showBackButton: boolean = false;
+
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+  ) {}
+
+  ngOnInit(): void {
+
+    this.router.events.subscribe( event => {
+      if ( event instanceof NavigationEnd )
+      this.showBackButton = event.urlAfterRedirects != '/arch';
+    });
+  }
+
+  goBack(): void {
+    this.router.navigate(['arch']);
+  }
 
 }

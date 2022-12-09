@@ -1,0 +1,17 @@
+<div class="gk-stepper-arrows">
+    <h1 class="gk-stepper-arrows-arrow" *ngIf="stepperIndex > 0" (click)="gotToStep(0)">
+        <i class="bi bi-skip-start"></i>
+    </h1>
+    <h1 class="gk-stepper-arrows-arrow" *ngIf="stepperIndex > 0" (click)="gotToStep(stepperIndex - 1)">
+        <i class="bi bi-arrow-left-circle"></i>
+    </h1>
+    <h1 class="gk-stepper-arrows-arrow" (click)="gotToStep()">
+        <i class="bi bi-input-cursor"></i>
+    </h1>
+    <h1 class="gk-stepper-arrows-arrow" *ngIf="stepperIndex < totalLength - 1" (click)="gotToStep(stepperIndex + 1)">
+        <i class="bi bi-arrow-right-circle"></i>
+    </h1>
+    <h1 class="gk-stepper-arrows-arrow" *ngIf="stepperIndex < totalLength - 1" (click)="gotToStep(totalLength - 1)">
+        <i class="bi bi-skip-end"></i>
+    </h1>
+</div>

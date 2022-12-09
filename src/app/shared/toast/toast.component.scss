@@ -1,0 +1,16 @@
+.gk-toast {
+    position: absolute;
+    top: 3rem;
+    display: flex;
+    justify-content: center;
+    background-color: rgba(251, 194, 9, 0.923);
+    left: calc(50% - 2rem);
+    border-radius: 10px;
+    padding: 0.5rem;
+    color: black;
+    &-container {
+        display: flex;
+        justify-content: center;
+        max-width: 50%;
+    }
+}

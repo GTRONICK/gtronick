@@ -12,11 +12,11 @@ import { FooterComponent } from './layout/footer/footer.component';
     AppComponent,
     SidebarComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,16 @@
+.gk-stepper{
+    &-arrows {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        &-arrow {
+            transition: 0.5s;
+            color: rgba(245, 245, 245, 0.547);
+            padding: 0 1rem;
+            &:hover {
+                transform: scale(1.5);
+                color: whitesmoke;
+            }
+        }
+    }
+}

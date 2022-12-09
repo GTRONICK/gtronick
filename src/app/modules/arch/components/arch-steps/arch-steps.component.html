@@ -1,0 +1,52 @@
+<ng-container *ngFor="let step of steps; let i = index">
+  <div
+    *ngIf="i == stepperIndex"
+    class="gk-arch-steps animate__animated"
+    [ngClass]="{
+      animate__fadeInRight: isGoingForward,
+      animate__fadeInLeft: !isGoingForward
+    }"
+  >
+    <div class="gk-arch-steps-item">
+      <h3 class="gk-arch-steps-title">
+        {{ step.index }}. {{ step.title }}
+      </h3>
+      <h5 class="gk-arch-steps-subtitle">
+        {{ step.subtitle }}
+      </h5>
+      <p class="gk-arch-steps-desc">{{ step.description }}</p>
+      <ng-container *ngIf="step.commands && step.commands.length > 0">
+        <div class="gk-arch-steps-command-container" *ngFor="let item of step.commands">
+          <pre class="gk-arch-steps-command-pre">
+            <code class="gk-arch-steps-command-instruction" #inputTarget>{{ item.command | partition }}</code>
+            <code *ngFor="let comment of item.comments" class="gk-arch-steps-command-comment"><i class="bi bi-exclamation-triangle"></i> {{ comment }}</code>
+          </pre>
+          <button
+            type="button"
+            (click)="showCopyNotification()"
+            title="Copy"
+            class="btn btn-warning btn-sm gk-arch-steps-command-copy"
+            ngxClipboard
+            [cbContent]="item.command">
+            <i class="bi bi-clipboard"></i>
+          </button>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</ng-container>
+<gk-stepper
+  [stepperIndex]="stepperIndex"
+  [totalLength]="steps.length"
+  (onStep)="gotToStep($event)"
+></gk-stepper>
+<gk-toast
+  *ngIf="isCopyActive$ | async"
+  class="animate__animated"
+  [ngClass]="
+    {
+      'animate__fadeInDown': isCopyNotificationVisible,
+      'animate__fadeOutUp': !isCopyNotificationVisible
+    }"
+>
+</gk-toast>

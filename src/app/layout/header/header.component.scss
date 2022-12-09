@@ -3,6 +3,25 @@
     min-height: 2rem;
     background-color: rgba(53, 53, 51, 0.382);
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     color: whitesmoke;
+    &-spacer {
+        max-height: 2rem;
+        display: flex;
+        min-width: 3rem;
+        padding: 0 1rem;
+        align-items: center;
+        img {
+            max-height: 1.5rem;
+        }
+    }
+    &-exit {
+        justify-self: flex-start;
+        cursor: pointer;
+    }
+    h3 {
+        margin: 0;
+        padding: 0;
+        font-style: italic;
+    }
 }

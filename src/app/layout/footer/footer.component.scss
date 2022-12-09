@@ -1,9 +1,28 @@
 .gk-footer {
     width: 100%;
-    max-height: 3rem;
+    min-height: 2rem;
     background-color: rgba(53, 53, 51, 0.382);
     display: flex;
-    justify-content: center;
-    font-size: smaller;
+    justify-content: space-between;
     color: whitesmoke;
+    align-items: center;
+    &-spacer {
+        max-height: 2rem;
+        display: flex;
+        min-width: 3rem;
+        padding: 0 1rem;
+        align-items: center;
+        color: whitesmoke;
+        img {
+            max-height: 1.5rem;
+        }
+    }
+    &-exit {
+        justify-self: flex-start;
+        cursor: pointer;
+    }
+    h5 {
+        margin: 0;
+        padding: 0;
+    }
 }
