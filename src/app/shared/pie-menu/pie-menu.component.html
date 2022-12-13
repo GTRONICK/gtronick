@@ -1,0 +1,34 @@
+<div class="gk-pie-menu" [ngClass]="{'gk-pie-menu-activated': showPieMenu}">
+    <div
+        (click)="$event.stopPropagation(); showPieMenu = !showPieMenu"
+        class="gk-pie-menu-main"
+        [class.gk-pie-menu-main-rotate]="showPieMenu">
+        <i class="bi bi-plus-circle"></i>
+    </div>
+    <a
+        href="https://github.com/GTRONICK/gtronick.github.io"
+        target="_blank"
+        class="animate__animated animate__faster gk-pie-menu-one"
+        [ngClass]="{'animate__fadeInRight': showPieMenu, 'animate__fadeOutRight gk-pie-menu-hidden': !showPieMenu}">
+        <i class="bi bi-github"></i>
+    </a>
+    <a
+        href="https://ko-fi.com/gtronick"
+        target="_blank"
+        class="animate__animated animate__faster animate__delay-1s gk-pie-menu-two"
+        [ngClass]="{'animate__fadeInBottomRight': showPieMenu, 'animate__fadeOutBottomRight gk-pie-menu-hidden': !showPieMenu}">
+        <i class="bi bi-cup-hot"></i>
+    </a>
+    <!-- <a
+        class="animate__animated animate__faster animate__delay-1s gk-pie-menu-three"
+        [ngClass]="{'animate__fadeInUp': showPieMenu, 'animate__fadeOutDown gk-pie-menu-hidden': !showPieMenu}">
+        <i class="bi bi-arrow-down-circle"></i>
+    </a> -->
+    <a
+        href="https://wiki.archlinux.org/title/Installation_guide"
+        target="_blank"
+        class="animate__animated animate__faster animate__delay-1s gk-pie-menu-three"
+        [ngClass]="{'animate__fadeInUp': showPieMenu, 'animate__fadeOutDown gk-pie-menu-hidden': !showPieMenu}">
+        <img src="assets/svg/arch3.svg" alt="Archlinux logo">
+    </a>
+</div>

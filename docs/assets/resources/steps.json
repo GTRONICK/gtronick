@@ -120,10 +120,6 @@
         "title": "Conexión WiFi",
         "subtitle": "",
         "description": "Conectarse a una red",
-        "input":{
-            "prompt":"Por favor, ingresa el SSID de la red a la que te deseas conectar",
-            "varName":"<SSID>"
-        },
         "commands": [
             {
                 "command": "station <device> connect <SSID>",

@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ClipboardModule } from 'ngx-clipboard';
 import { ToastComponent } from './toast/toast.component';
 import { PartitionPipe } from './pipes/partition.pipe';
+import { PieMenuComponent } from './pie-menu/pie-menu.component';
 
 
 
@@ -11,7 +12,8 @@ import { PartitionPipe } from './pipes/partition.pipe';
   declarations: [
     StepperComponent,
     ToastComponent,
-    PartitionPipe
+    PartitionPipe,
+    PieMenuComponent
   ],
   imports: [
     CommonModule,
@@ -20,6 +22,7 @@ import { PartitionPipe } from './pipes/partition.pipe';
   exports: [
     StepperComponent,
     ToastComponent,
+    PieMenuComponent,
     ClipboardModule,
     PartitionPipe
   ]
